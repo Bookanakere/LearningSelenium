@@ -17,11 +17,23 @@ class Main{
 
         driver.get(baseUrl);
         
-        WebDriverWait waitTillLanguage = new WebDriverWait(driver,10);
+        WebDriverWait waitTill = new WebDriverWait(driver,10);
 
  		
-        clickElement(By.id("dropdownLangauge"),waitTillLanguage);
-        clickElement(By.id("en"),waitTillLanguage);
+        clickElement(By.id("dropdownLangauge"),waitTill);
+        clickElement(By.id("en"),waitTill);
+        clickElement(By.className("select2-input"), waitTill);
+        
+        try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        WebElement destination = driver.findElement(By.className("select2-input"));
+        System.out.println(destination.getAttribute("innerHTML"));
+        destination.sendKeys("Amsterdam");
         
   
 		/*
@@ -42,5 +54,6 @@ class Main{
 			returnClickElement.click();
 		
 	}
+	
 	
 }
