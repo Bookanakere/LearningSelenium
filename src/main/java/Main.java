@@ -13,8 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 class Main{
 
-	
-
 
 	public static void main(String[] args) {
 		
@@ -35,12 +33,10 @@ class Main{
         WebDriverWait waitTill = new WebDriverWait(driver,10);
 
  		
-        // Go to snacks via search option
+        // Go to Snacks via search option
         clickElement(By.className("search-bar__input"),waitTill);
         clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"),waitTill);
         
-        
- 
         
         /* Option 1
         *******Add product directly from main page,  submit form using id *****
@@ -50,33 +46,27 @@ class Main{
         */
         
         
-        
-        
         /* Option 2
          * 
          ********** Add product directly from main page, find form using sibling function *****************/
         
          clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']/following-sibling::div[contains(@class,'product-item__info')]/form[@action='/cart/add']"),waitTill);
          
-       /********** Add product directly from main page, find form using sibling function *****************
+        /********** Add product directly from main page, find form using sibling function *****************
        
-      
-       
-        
-        
+     
         /* Option 3
          * *****First click on the product, then add to cart, form submission doesn't work here, so find button **********
          
         
-        clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']"),waitTill);
+         clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']"),waitTill);
         
-        clickElement(By.xpath("//form[@id='product_form_6040900567190']//div[@class = 'product-form__payment-container']//button[@type='submit']"),waitTill);
+         clickElement(By.xpath("//form[@id='product_form_6040900567190']//div[@class = 'product-form__payment-container']//button[@type='submit']"),waitTill);
         
         /*
          * *****First click on the product, then add to cart, form submission doesn't work here, so find button**********
          */
         
- 	
          
          //click on cart and checkout
          clickElement(By.xpath("//a[@href='/cart']"),waitTill);
@@ -89,6 +79,12 @@ class Main{
          //inputEmail.sendKeys("abc@gmail.com");
          
          inputValues(By.id("checkout_email_or_phone"), waitTill, "abc@gmail.com");
+         inputValues(By.id("checkout_shipping_address_last_name"), waitTill, "Sharma");
+         inputValues(By.id("checkout_shipping_address_address1"), waitTill, "32, Groenlaan");
+         inputValues(By.id("checkout_shipping_address_zip"), waitTill, "3245TS");
+         inputValues(By.id("checkout_shipping_address_city"), waitTill, "Amstelveen");
+         inputValues(By.id("checkout_shipping_address_phone"), waitTill, "631222333");
+         clickElement(By.id("continue_button"), waitTill);
          
 
         try {
@@ -116,9 +112,7 @@ class Main{
 	
 	/*************** Reference Code *******************************
 	
-	
-	
-	 * ***** wait*********
+	 /* ***** wait*********
 	 *        try {
 			Thread.sleep(1800);
 		} catch (InterruptedException e) {
@@ -128,13 +122,11 @@ class Main{
       ******* wait ********
       *
       *
-      *
       ***** find an element and print its attributes******
       *   WebElement newElement = driver.findElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']"));
         System.out.println(newElement.getAttribute("innerHTML"));
       *
       * ***** find an element and print its attributes******
-      *  
 	 * 
 	 */
 	
