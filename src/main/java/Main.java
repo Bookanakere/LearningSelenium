@@ -91,6 +91,7 @@ class Main{
         driver.close();
         driver.switchTo().window(parentHandle);
         driver.close();
+        //Adding this comment to learn the branching process
 	}
 	
 	private static void clickElement(By by, WebDriverWait webDriverWait) { 
