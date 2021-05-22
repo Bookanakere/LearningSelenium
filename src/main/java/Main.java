@@ -1,13 +1,16 @@
 
 
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,42 +33,33 @@ class Main{
 
         driver.get(baseUrl);
         
+        String parentHandle = driver.getWindowHandle();
+        
         WebDriverWait waitTill = new WebDriverWait(driver,10);
 
  		
-        // Go to Snacks via search option
+        // Go to Snacks via search option and open in new window
         clickElement(By.className("search-bar__input"),waitTill);
-        clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"),waitTill);
+        WebElement link = driver.findElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"));
+        Actions newwin = new Actions(driver);
+        newwin.keyDown(Keys.SHIFT).click(link).keyUp(Keys.SHIFT).build().perform();
+       
         
+        //Focus on new window to continue the flow
+        Set<String> allWinHandles = driver.getWindowHandles();
         
-        /* Option 1
-        *******Add product directly from main page,  submit form using id *****
-        **
-         clickElement(By.id("product_form_id_6040900567190_collection-template"),waitTill);
-        ****Add product directly from main page,  submit form using id ********
-        */
-        
-        
-        /* Option 2
-         * 
-         ********** Add product directly from main page, find form using sibling function *****************/
+        allWinHandles.forEach((String winHandle)-> {
+        	if(winHandle != parentHandle)
+        		driver.switchTo().window(winHandle);
+        });
+
+  
+         /********** Add product directly from main page, find form using sibling function *****************/
         
          clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']/following-sibling::div[contains(@class,'product-item__info')]/form[@action='/cart/add']"),waitTill);
          
         /********** Add product directly from main page, find form using sibling function *****************
-       
-     
-        /* Option 3
-         * *****First click on the product, then add to cart, form submission doesn't work here, so find button **********
-         
-        
-         clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']"),waitTill);
-        
-         clickElement(By.xpath("//form[@id='product_form_6040900567190']//div[@class = 'product-form__payment-container']//button[@type='submit']"),waitTill);
-        
-        /*
-         * *****First click on the product, then add to cart, form submission doesn't work here, so find button**********
-         */
+      
         
          
          //click on cart and checkout
@@ -95,6 +89,8 @@ class Main{
 		}
 	
         driver.close();
+        driver.switchTo().window(parentHandle);
+        driver.close();
 	}
 	
 	private static void clickElement(By by, WebDriverWait webDriverWait) { 
@@ -103,7 +99,6 @@ class Main{
 			element.click();
 		
 	}
-	
 	
 	private static void inputValues(By by, WebDriverWait webDriverWait, String input) {
 		WebElement element = webDriverWait.until(ExpectedConditions.elementToBeClickable(by));
