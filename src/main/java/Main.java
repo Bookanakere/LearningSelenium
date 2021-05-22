@@ -58,7 +58,7 @@ class Main{
         
          clickElement(By.xpath("//a[@href='/collections/snacks/products/parle-g-big-799g']/following-sibling::div[contains(@class,'product-item__info')]/form[@action='/cart/add']"),waitTill);
          
-        /********** Add product directly from main page, find form using sibling function *****************
+        /********** Add product directly from main page, find form using sibling function *****************/
       
         
          
