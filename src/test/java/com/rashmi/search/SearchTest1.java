@@ -4,8 +4,6 @@ package com.rashmi.search;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,21 +19,17 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * 
- */
-
-/**
  * @author rashmibookanakere
  *
  */
-class Search_Test {
+class SearchTest1 {
 	
 	
 	private WebDriver driver;
 	private WebDriverWait waitTill;
 
 	/**
-	 * @throws java.lang.Exception
+	 * @throws Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
