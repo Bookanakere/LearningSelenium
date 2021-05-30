@@ -1,28 +1,27 @@
 package com.rashmi.search;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author rashmibookanakere
  *
  */
-class SearchTest1 {
+public class SearchTest1 {
 	
 	
 	private WebDriver driver;
@@ -31,8 +30,8 @@ class SearchTest1 {
 	/**
 	 * @throws Exception
 	 */
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		System.setProperty("webdriver.chrome.driver","chromedriver");
 
 		ChromeOptions options = new ChromeOptions();
@@ -52,7 +51,7 @@ class SearchTest1 {
 	}
 
 	@Test
-	void test_1() {
+	public void test_1() {
 		
 		 
 			
@@ -70,33 +69,15 @@ class SearchTest1 {
 	   
 	
 	}
-	
-	@Test
-	void test_2() {
-		// Test for search category
-		
-		//clickElement(By.id("search-product-type"), waitTill);
-		Select category = new Select(driver.findElement(By.id("search-product-type")));
-		category.selectByVisibleText("snacks");
-		clickElement(By.className("search-bar__submit"), waitTill);
-		try {
-			Thread.sleep(1800);
-		} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-			}
-		WebElement collectionHeading = driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
-		assertEquals(collectionHeading.getAttribute("innerHTML"),"Products for \"snacks\"");
-		
-	}
+
 	
 	private static void clickElement(By by, WebDriverWait webDriverWait) { 
 			
 			WebElement element= webDriverWait.until(ExpectedConditions.elementToBeClickable(by));        
 				element.click();
 	}
-	@AfterEach
-	void tearDown() {
+	@After
+	public void tearDown() {
 		driver.close();
 		
 	}
