@@ -1,4 +1,4 @@
-package com.rashmi.search;
+package com.rashmi.test;
 
 
 
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  * @author rashmibookanakere
  *
  */
-public class SearchTest2 {
+public class SearchCategoryTest {
 
 
     private WebDriver driver;

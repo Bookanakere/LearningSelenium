@@ -1,4 +1,4 @@
-package com.rashmi.search;
+package com.rashmi.test;
 
 
 import java.util.concurrent.TimeUnit;
@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
@@ -21,11 +20,12 @@ import static org.junit.Assert.assertEquals;
  * @author rashmibookanakere
  *
  */
-public class SearchTest1 {
+public class SearchTest {
 	
 	
 	private WebDriver driver;
 	private WebDriverWait waitTill;
+	private Utilities utility;
 
 	/**
 	 * @throws Exception
@@ -47,17 +47,16 @@ public class SearchTest1 {
         driver.get(baseUrl);
         driver.manage().window().maximize();
         waitTill = new WebDriverWait(driver,10);
+		utility = new Utilities();
         
 	}
 
 	@Test
 	public void test_1() {
-		
-		 
-			
+
 	 		 // Go to Snacks via search option and open in new window
-	        clickElement(By.className("search-bar__input"),waitTill);
-	        clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"),waitTill);
+	        utility.clickElement(By.className("search-bar__input"),waitTill);
+	        utility.clickElement(By.xpath("//ul[contains(@class,'search-bar__menu-linklist')]//a[@href='/collections/snacks']"),waitTill);
 	        try {
 				Thread.sleep(1800);
 			} catch (InterruptedException e) {
@@ -70,12 +69,14 @@ public class SearchTest1 {
 	
 	}
 
-	
-	private static void clickElement(By by, WebDriverWait webDriverWait) { 
-			
-			WebElement element= webDriverWait.until(ExpectedConditions.elementToBeClickable(by));        
-				element.click();
+
+	/*private static void findElement(By by, WebDriverWait webDriverWait) {
+
+		WebElement element= webDriverWait.until(ExpectedConditions.elementToBeClickable(by));
+		WebElement collectionHeading = driver.findElement(By.xpath("//h1[contains(@class,'collection__title')]"));
 	}
+	*/
+
 	@After
 	public void tearDown() {
 		driver.close();
