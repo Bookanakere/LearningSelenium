@@ -22,7 +22,7 @@ public class TestBase {
         System.setProperty("webdriver.chrome.driver","chromedriver");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-notifications", "--no-sandbox");
 
         driver = new ChromeDriver(options);
 
