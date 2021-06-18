@@ -1,6 +1,7 @@
 package com.rashmi.main;
 
 
+import java.net.URL;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -11,20 +12,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 class Main{
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+
+
 		
         System.setProperty("webdriver.chrome.driver","chromedriver");
 
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		
-        WebDriver driver = new ChromeDriver(options);
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("platform", "Windows 10");
+        caps.setCapability("version", "latest");
+        WebDriver driver = new RemoteWebDriver(
+                new URL("https://oauth-rash.pb-80227:b642179d-cbb1-4a4b-b847-c4aa90a5886f@ondemand.eu-central-1.saucelabs.com:443/wd/hub"), caps);
+
 
         driver.manage().timeouts().setScriptTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
