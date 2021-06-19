@@ -14,7 +14,6 @@ import static org.junit.Assert.assertEquals;
 public class SearchTest extends TestBase{
 
 
-
 	@Test
 	public void test_1() {
 
